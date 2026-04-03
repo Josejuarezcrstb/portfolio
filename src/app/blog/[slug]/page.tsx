@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { CustomMDX, ScrollToHash } from "@/components";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import {
   Meta,
   Schema,
@@ -11,7 +12,6 @@ import {
   Text,
   SmartLink,
   Avatar,
-  Media,
   Line,
 } from "@once-ui-system/core";
 import { baseURL, about, blog, person } from "@/resources";
@@ -32,32 +32,49 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string | string[] }>;
+  params: { slug: string | string[] };
 }): Promise<Metadata> {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+  const slugPath = Array.isArray(params.slug) ? params.slug.join("/") : params.slug || "";
 
   const posts = getPosts(["src", "app", "blog", "posts"]);
   let post = posts.find((post) => post.slug === slugPath);
 
   if (!post) return {};
 
+  const imagePath = post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`;
+
   return Meta.generate({
     title: post.metadata.title,
     description: post.metadata.summary,
     baseURL: baseURL,
-    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
+    image: imagePath,
     path: `${blog.path}/${post.slug}`,
-  });
+    twitter: {
+      card: "summary_large_image",
+      title: post.metadata.title,
+      description: post.metadata.summary,
+      images: [imagePath],
+    },
+    openGraph: {
+      title: post.metadata.title,
+      description: post.metadata.summary,
+      url: `${baseURL}${blog.path}/${post.slug}`,
+      type: "article",
+      images: [
+        {
+          url: `${baseURL}${imagePath}`,
+          width: 1200,
+          height: 630,
+          alt: `${post.metadata.title} preview`,
+        },
+      ],
+      siteName: blog.title,
+    },
+  } as any);
 }
 
-export default async function Blog({ params }: { params: Promise<{ slug: string | string[] }> }) {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+export default async function Blog({ params }: { params: { slug: string | string[] } }) {
+  const slugPath = Array.isArray(params.slug) ? params.slug.join("/") : params.slug || "";
 
   let post = getPosts(["src", "app", "blog", "posts"]).find((post) => post.slug === slugPath);
 
@@ -121,16 +138,15 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             </Row>
           </Row>
           {post.metadata.image && (
-            <Media
+            <OptimizedImage
               src={post.metadata.image}
               alt={post.metadata.title}
-              aspectRatio="16/9"
-              priority
+              width={1120}
+              height={630}
               sizes="(min-width: 768px) 100vw, 768px"
-              border="neutral-alpha-weak"
-              radius="l"
-              marginTop="12"
-              marginBottom="8"
+              loading="lazy"
+              priority={false}
+              style={{ borderRadius: "1rem", marginTop: "12px", marginBottom: "8px" }}
             />
           )}
           <Column as="article" maxWidth="s">

@@ -1,0 +1,69 @@
+---
+title: "Supply Chain Analytics Architecture"
+publishedAt: "2026-03-31"
+summary: "A secure, scalable architecture for supply chain analytics using Blazor, Azure SQL Database, and Appwrite."
+technologies:
+  - "Blazor"
+  - "Appwrite"
+  - "Azure SQL Database"
+images:
+  - "/images/projects/architecture-diagram-cover.jpg"
+---
+
+## Supply Chain Analytics Architecture
+
+Este caso de estudio describe el desarrollo de un dashboard interactivo para líderes de Supply Chain en una empresa líder mexicana. El objetivo del proyecto es proporcionar visibilidad en tiempo real para balancear la carga de trabajo entre compradores y monitorear KPIs clave de desempeño.
+
+El sistema se construyó con Blazor WebAssembly (frontend), Appwrite (autenticación y backend) y Azure SQL Database (capa de datos). La solución apunta a un entorno corporativo de gran escala, con datos pre-normalizados en un sistema ERP global.
+
+---
+
+## The Challenge
+
+- Falta de visibilidad operativa en tiempo real para coordinadores de compras.
+- Requerimiento de una interfaz segura y rápida con latencia menor a 2 segundos.
+- Integración en una arquitectura distribuida cruzando límites de proveedor (Blazor + Appwrite + Azure SQL) y control de roles (coordinador/comprador/administrador).
+- Necesidad de generar alertas de saturación y datos procesables sin modificar la base transaccional.
+
+## The Architecture
+
+- Frontend: Blazor WebAssembly (SPA) con controles de gráficas, filtros y tarjetas KPI.
+- Autenticación: Appwrite Cloud con JWT y roles.
+- API: Minimal API ASP.NET Core para validación de token y consultas SQL con parámetros.
+- Base de datos: Azure SQL con tablas relacionales normalizadas (SAP S/4HANA-style).
+- Endpoints estratégicos: `/api/workload/kpis`, `/api/workload/buyer-load`, filtros de rango de fechas.
+
+## Advanced Troubleshooting
+
+Durante la integración técnica, resolví múltiples problemas de infraestructura y red:
+
+1. CORS y límites de origen
+   - Ajusté reglas CORS en Appwrite y configuración de cabeceras en Blazor.
+   - Validé que las peticiones preflight (`OPTIONS`) se resolvieran con 204 y que las cabeceras `Authorization` y `Content-Type` estuvieran permitidas.
+
+2. Autenticación y token flow
+   - Implementé un middleware en la Minimal API para verificar la validez JWT de Appwrite y recuperar el rol del usuario.
+   - Diagnostiqué 401/403 en llamadas con tokens expirados o en roles sin permisos.
+
+3. Azure SQL y throttling
+   - Afiné la conexión a Azure SQL con retry policies y timeout escalable.
+   - Monitoricé consultas de agregación (`SUM`, `COUNT`, `GROUP BY`) para evitar bloqueos de row-locks.
+
+4. GitHub Copilot CLI para depuración avanzada
+   - Usé Copilot CLI para inyectar diagnósticos en tiempo real: streaming de stack traces, comandos para inspeccionar contenedores y headers de Appwrite.
+   - De “guess and refresh” a un proceso metódico con pasos comprobables, con resultados reproducibles para conflictos `409` y ajustes en `blazor.webassembly.js`.
+
+## Impact & Next Steps
+
+**Resultados tempranos:**
+- Dashboard funcional con KPIs de carga de trabajo por comprador.
+- Mecanismo de semáforo (rojo/amarillo/verde) para reasignación proactiva.
+- Exportación de datasets a CSV/Excel para reporting.
+
+**Próximos pasos:**
+- Avanzar en caching y prefetching de consultas para mantener latencias < 2s.
+- Refinar UX de visualización con animaciones suaves y páginas KPI por role.
+- Incorporar recomendaciones automáticas mediante reglas de negocio (y/o ML ligero) basadas en carga histórica.
+
+Este proyecto valida la capacidad de diseñar y operar soluciones seguras, escalables y orientadas al negocio en sistemas distribuidos, mientras se mantiene un enfoque sólido en calidad de datos y tiempo de respuesta.
+

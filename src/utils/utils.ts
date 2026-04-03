@@ -1,29 +1,11 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-
-type Team = {
-  name: string;
-  role: string;
-  avatar: string;
-  linkedIn: string;
-};
-
-type Metadata = {
-  title: string;
-  subtitle?: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-  images: string[];
-  tag?: string;
-  team: Team[];
-  link?: string;
-};
-
 import { notFound } from "next/navigation";
+import { getCachedPosts } from "@/utils/mdxCache";
+import { MdxPost, MdxPostMetadata } from "@/types/content.types";
 
-function getMDXFiles(dir: string) {
+function getMDXFiles(dir: string): string[] {
   if (!fs.existsSync(dir)) {
     notFound();
   }
@@ -31,7 +13,7 @@ function getMDXFiles(dir: string) {
   return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
 }
 
-function readMDXFile(filePath: string) {
+function readMDXFile(filePath: string): { metadata: MdxPostMetadata; content: string } {
   if (!fs.existsSync(filePath)) {
     notFound();
   }
@@ -39,22 +21,22 @@ function readMDXFile(filePath: string) {
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(rawContent);
 
-  const metadata: Metadata = {
-    title: data.title || "",
-    subtitle: data.subtitle || "",
-    publishedAt: data.publishedAt,
-    summary: data.summary || "",
-    image: data.image || "",
-    images: data.images || [],
-    tag: data.tag || [],
-    team: data.team || [],
-    link: data.link || "",
+  const metadata: MdxPostMetadata = {
+    title: (data.title as string) ?? "",
+    subtitle: (data.subtitle as string) ?? undefined,
+    publishedAt: (data.publishedAt as string) ?? "",
+    summary: (data.summary as string) ?? "",
+    image: (data.image as string) ?? undefined,
+    images: (data.images as string[]) ?? [],
+    tag: (data.tag as string) ?? undefined,
+    team: (data.team as MdxPostMetadata["team"]) ?? [],
+    link: (data.link as string) ?? undefined,
   };
 
   return { metadata, content };
 }
 
-function getMDXData(dir: string) {
+function getMDXData(dir: string): MdxPost[] {
   const mdxFiles = getMDXFiles(dir);
   return mdxFiles.map((file) => {
     const { metadata, content } = readMDXFile(path.join(dir, file));
@@ -68,7 +50,7 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getPosts(customPath = ["", "", "", ""]) {
+export function getPosts(customPath = ["", "", "", ""]): MdxPost[] {
   const postsDir = path.join(process.cwd(), ...customPath);
-  return getMDXData(postsDir);
+  return getCachedPosts(postsDir, () => getMDXData(postsDir));
 }

@@ -1,0 +1,98 @@
+@use "../breakpoints.scss" as breakpoints;
+
+.skillsSection {
+  width: 100%;
+  margin-top: var(--space-32);
+  padding: var(--space-16) 0;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-16);
+}
+
+.skillCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-m);
+  padding: var(--space-16);
+  background: var(--background-muted);
+  min-height: 160px;
+}
+
+.skillTitle {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.skillDescription {
+  margin: 0;
+  color: var(--neutral-on-background-weak);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skillTag {
+  background-color: var(--neutral-alpha-weak);
+  color: var(--neutral-on-background-strong);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: 1px solid var(--neutral-alpha-medium);
+}
+
+.softSkillsSection {
+  margin-top: var(--space-24);
+  padding: var(--space-16) 0;
+}
+
+.softSkillsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.softSkillCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: var(--background-weak);
+}
+
+.softSkillTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.softSkillDescription {
+  color: var(--neutral-on-background-weak);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+@media (max-width: breakpoints.$s) {
+  .softSkillsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: breakpoints.$s) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -2,20 +2,44 @@ import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL, blog, person, newsletter } from "@/resources";
+import styles from "@/components/animations.module.scss";
 
 export async function generateMetadata() {
+  const imageUrl = `/api/og/generate?title=${encodeURIComponent(blog.title)}`;
+
   return Meta.generate({
     title: blog.title,
     description: blog.description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(blog.title)}`,
+    image: imageUrl,
     path: blog.path,
-  });
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.description,
+      images: [imageUrl],
+    },
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      url: `${baseURL}${blog.path}`,
+      type: "website",
+      images: [
+        {
+          url: `${baseURL}${imageUrl}`,
+          width: 1200,
+          height: 630,
+          alt: `${blog.title} preview`,
+        },
+      ],
+      siteName: blog.title,
+    },
+  } as any);
 }
 
 export default function Blog() {
   return (
-    <Column maxWidth="m" paddingTop="24">
+    <Column className={styles.fadeInUp} maxWidth="m" paddingTop="24">
       <Schema
         as="blogPosting"
         baseURL={baseURL}

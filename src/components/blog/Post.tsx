@@ -1,11 +1,13 @@
 "use client";
 
-import { Card, Column, Media, Row, Avatar, Text } from "@once-ui-system/core";
+import { Card, Column, Row, Avatar, Text } from "@once-ui-system/core";
 import { formatDate } from "@/utils/formatDate";
 import { person } from "@/resources";
+import { MdxPost } from "@/types/content.types";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface PostProps {
-  post: any;
+  post: MdxPost;
   thumbnail: boolean;
   direction?: "row" | "column";
 }
@@ -26,15 +28,15 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
       s={{ direction: "column" }}
     >
       {post.metadata.image && thumbnail && (
-        <Media
-          priority
-          sizes="(max-width: 768px) 100vw, 640px"
-          border="neutral-alpha-weak"
-          cursor="interactive"
-          radius="l"
+        <OptimizedImage
           src={post.metadata.image}
-          alt={"Thumbnail of " + post.metadata.title}
-          aspectRatio="16 / 9"
+          alt={`Thumbnail of ${post.metadata.title}`}
+          width={800}
+          height={450}
+          sizes="(max-width: 768px) 100vw, 640px"
+          priority={false}
+          loading="lazy"
+          style={{ borderRadius: "1rem" }}
         />
       )}
       <Row fillWidth>

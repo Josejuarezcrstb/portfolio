@@ -47,11 +47,15 @@ async function fetchWithTimeout(url: string, timeout = 5000) {
 }
 
 async function extractMetadata(html: string) {
-  const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-  const descMatch = html.match(/<meta[^>]*name="description"[^>]*content="([^"]+)"[^>]*>/i) 
+  const titleMatch = html.match(/<meta[^>]*property="og:title"[^>]*content="([^"]+)"[^>]*>/i)
+    || html.match(/<meta[^>]*name="twitter:title"[^>]*content="([^"]+)"[^>]*>/i)
+    || html.match(/<title[^>]*>([^<]+)<\/title>/i);
+  const descMatch = html.match(/<meta[^>]*name="description"[^>]*content="([^"]+)"[^>]*>/i)
     || html.match(/<meta[^>]*content="([^"]+)"[^>]*name="description"[^>]*>/i)
-    || html.match(/<meta[^>]*property="og:description"[^>]*content="([^"]+)"[^>]*>/i);
+    || html.match(/<meta[^>]*property="og:description"[^>]*content="([^"]+)"[^>]*>/i)
+    || html.match(/<meta[^>]*name="twitter:description"[^>]*content="([^"]+)"[^>]*>/i);
   const imageMatch = html.match(/<meta[^>]*property="og:image"[^>]*content="([^"]+)"[^>]*>/i)
+    || html.match(/<meta[^>]*name="twitter:image"[^>]*content="([^"]+)"[^>]*>/i)
     || html.match(/<meta[^>]*content="([^"]+)"[^>]*property="og:image"[^>]*>/i);
 
   const title = titleMatch?.[1]?.trim() || '';

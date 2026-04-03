@@ -1,49 +1,27 @@
 import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
-import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  firstName: "Jose Maria",
+  lastName: "Juarez",
+  name: "Jose Maria Juarez",
+  role: "IT student pivoting to ML/MLOps with Azure",
+  avatar: "/images/avatar-profile.jpg",
+  email: "j0s3.juarez@gmail.com",
+  location: "America/Monterrey",
+  languages: ["Spanish (Native)", "English (Professional)"],
 };
 
 const newsletter: Newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  display: false,
+  title: <>Stay in the loop with {person.firstName}</>,
+  description: <>Brief notes on data, ML/MLOps, fraud prevention, and forecasting.</>,
 };
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  // Set essentials: true for links you want to show on the about page
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system",
-    essential: true,
-  },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-    essential: true,
-  },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    link: "https://www.linkedin.com/in/j0s3-juarez/",
     essential: true,
   },
   {
@@ -52,40 +30,75 @@ const social: Social = [
     link: `mailto:${person.email}`,
     essential: true,
   },
+  {
+    name: "WhatsApp",
+    icon: "whatsapp",
+    link: "https://wa.me/528112379437",
+    essential: true,
+  },
 ];
 
 const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  title: `${person.name} | ML & MLOps Portfolio`,
+  description: `Portfolio highlighting the transition from WFM and fraud prevention into Machine Learning and Azure MLOps by ${person.name}`,
+  headline: <>Bridging Operational Analytics and Data Engineering</>,
   featured: {
-    display: true,
-    title: (
-      <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
-        <Line background="brand-alpha-strong" vert height="20" />
-        <Text marginRight="4" onBackground="brand-medium">
-          Featured work
-        </Text>
-      </Row>
-    ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    display: false,
+    title: <></>,
+    href: "/",
   },
   subline: (
     <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
-</>
+      Leveraging over 4 years of experience in data validation, KPI tracking, and workforce analytics. Currently focused on designing scalable data solutions, building Python-driven ETL processes, and managing relational databases with Azure SQL to ensure high data quality and empower business decisions.
+    </>
   ),
+  primaryCTA: {
+    label: "View Projects",
+    href: "/work",
+  },
+  secondaryCTA: {
+    label: "Dev Blog",
+    href: "/blog",
+  },
+  softSkills: {
+    title: "My Approach to Work",
+    cards: [
+      {
+        title: "System-Level Accountability",
+        description: (
+          <>
+            I understand that a company is an interconnected ecosystem. With over 4 years in operational environments, I know that my deliverables directly impact other teams. I take full ownership of my pipelines and data quality, ensuring seamless operations across departments.
+          </>
+        ),
+      },
+      {
+        title: "Autonomous & Collaborative",
+        description: (
+          <>
+            Whether navigating complex technical challenges independently or communicating cross-functionally in English and Spanish, I adapt quickly. I bring structured analytical thinking to autonomous tasks while remaining a highly communicative and supportive team player.
+          </>
+        ),
+      },
+      {
+        title: "Relentless Learner",
+        description: (
+          <>
+            The data landscape evolves rapidly, and I thrive on that momentum. I am deeply enthusiastic about tackling new challenges, continuously mastering modern architectures, and finding innovative ways to optimize existing processes.
+          </>
+        ),
+      },
+    ],
+  },
 };
 
 const about: About = {
   path: "/about",
   label: "About",
   title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  description: `Meet ${person.name}, an IT student transitioning from workforce analytics and fraud prevention into Machine Learning and Azure MLOps`,
   tableOfContent: {
     display: true,
     subItems: false,
@@ -94,7 +107,7 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -102,130 +115,125 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        As an IT Engineering student and Data Professional, I bring over 4 years of hands-on experience in data stewardship, validation, and analytics. My background in workforce management taught me the critical importance of data accuracy. Today, I apply that structured analytical thinking to Data Engineering—using Python (Pandas), SQL, and Azure to build reliable data ingestion workflows, cleanse complex datasets, and structure relational databases for advanced analytics. Fluent in English and Spanish, I thrive in environments that require complex problem-solving and cross-functional communication.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
+    display: true,
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Foundever",
+        timeframe: "Jan 2023 – Sep 2025",
+        role: "Fraud & Risk Analyst – Account Takeover Prevention (CRS III)",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Handled complex fraud cases for a major U.S. financial institution, specializing in Account Takeover prevention, identity verification, and high-impact decisioning to protect clients from financial loss.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Key responsibilities:
+            <ul>
+              <li>Investigated high-risk ATO cases using behavioral patterns and login anomalies.</li>
+              <li>Performed detailed risk assessments to gauge fraud exposure.</li>
+              <li>Executed identity verification and restored secure access for compromised accounts.</li>
+              <li>Documented findings for compliance with banking regulations.</li>
+              <li>Guided junior analysts on complex cases and best practices.</li>
+              <li>Balanced customer experience with strict risk-mitigation protocols.</li>
+            </ul>
           </>,
-        ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
+          <>
+            Core strengths: attention to fraud signals, fast decision-making under pressure, senior case handling, and secure, customer-centric resolutions.
+          </>,
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Centris Information Services",
+        timeframe: "Feb 2019 – Nov 2022",
+        role: "Reporting Analyst",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Progressed from operations to analytics, managing forecasting, reporting, and capacity optimization across multiple business lines.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Key contributions:
+            <ul>
+              <li>Forecasted multi-skill call volume and workload demand to optimize staffing and SLAs.</li>
+              <li>Built 13+ week capacity forecasts, schedules, and staffing models.</li>
+              <li>Monitored hours, shifts, billable time, and platform usage to surface risks.</li>
+              <li>Improved forecast accuracy using historical patterns and operational drivers.</li>
+              <li>Separated staffing gaps from process issues to target fixes.</li>
+              <li>Delivered data-driven insights for planning and allocation.</li>
+            </ul>
+          </>,
+          <>
+            Core strengths: workforce analytics, forecasting, KPI tracking, data storytelling, and stakeholder communication.
           </>,
         ],
-        images: [],
+      },
+      {
+        company: "MDY BPO & Contact Center",
+        timeframe: "Dec 2017 – Feb 2019",
+        role: "Workforce Management Analyst",
+        achievements: [
+          <>Analyzed and forecasted call volume to keep productivity and staffing balanced.</>,
+          <>Built dashboards and reports to communicate actionable recommendations.</>,
+          <>Earlier experience as Customer Service Representative focused on tech support.</>,
+        ],
       },
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
+    display: true,
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Universidad Autónoma de Nuevo León (UANL)",
+        description: (
+          <>
+            Bachelor of Information Technology (Licenciatura en TI). Expected graduation: Dec 2026. Coursework: Data Structures, Database Management, Probability & Statistics.
+          </>
+        ),
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
+    display: true,
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
-        description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
-        ),
+        title: "Lenguajes",
+        description: <>Python (Pandas, scripting), SQL.</>,
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+          { name: "Python (Pandas)" },
+          { name: "SQL" },
         ],
       },
       {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
+        title: "Cloud & Bases de Datos",
+        description: <>Azure SQL Database, modelado relacional y buenas prácticas en diseño de datos.</>,
         tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
+          { name: "Azure SQL Database" },
+          { name: "Relational Data Modeling" },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+      },
+      {
+        title: "Procesos",
+        description: <>ETL / ELT, Data Quality, Data Cleansing.</>,
+        tags: [
+          { name: "ETL / ELT Concepts" },
+          { name: "Data Quality" },
+          { name: "Data Cleansing" },
+        ],
+      },
+      {
+        title: "Herramientas & Entorno",
+        description: <>Git, Docker, Excel Advanced, Power BI.</>,
+        tags: [
+          { name: "Git" },
+          { name: "Docker" },
+          { name: "Excel Advanced" },
+          { name: "Power BI" },
         ],
       },
     ],
@@ -235,68 +243,52 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  title: "Dev Blog – ML & MLOps Journey",
+  description: "Documenting my path from workforce analytics and fraud prevention into Machine Learning Engineer with Azure and MLOps.",
 };
 
 const work: Work = {
-  path: "/work",
+  path: "/work/projects",
   label: "Work",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
+  description: `Machine Learning, MLOps, and data operations projects on Azure, backed by ${person.name}'s workforce and fraud analytics background`,
 };
 
 const gallery: Gallery = {
   path: "/gallery",
   label: "Gallery",
-  title: `Photo gallery – ${person.name}`,
-  description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
+  title: `Certificates – ${person.name}`,
+  description: `Certificates showcasing AI, Machine Learning, Python, Docker, databases, and Linux fundamentals by ${person.name}`,
   images: [
     {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
+      src: "/images/gallery/cert-foundations-ai-ml-microsoft.jpg",
+      alt: "Foundations of AI and Machine Learning – Microsoft (Mar 2026)",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
+      src: "/images/gallery/cert-machine-learning-with-python-ibm.jpg",
+      alt: "Machine Learning with Python – IBM (Feb 2026)",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
+      src: "/images/gallery/cert-terminal-linux-platzi.jpg",
+      alt: "Introduction to Terminal and Command Line (Linux/Bash) – Platzi (Sep 2022)",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
+      src: "/images/gallery/cert-intro-deep-learning-ibm.jpg",
+      alt: "Introduction to Deep Learning & Neural Networks with Keras – IBM",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
+      src: "/images/gallery/cert-docker-fundamentals-platzi.jpg",
+      alt: "Docker Fundamentals – Platzi (Dec 2025)",
+      orientation: "horizontal",
+    },
+    {
+      src: "/images/gallery/cert-bases-de-datos-platzi.jpg",
+      alt: "Curso de Fundamentos de Bases de Datos – Platzi (Sep 2022)",
+      orientation: "horizontal",
     },
   ],
 };

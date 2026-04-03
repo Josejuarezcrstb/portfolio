@@ -1,20 +1,44 @@
 import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
+import styles from "@/components/animations.module.scss";
 
 export async function generateMetadata() {
+  const imageUrl = `/api/og/generate?title=${encodeURIComponent(work.title)}`;
+
   return Meta.generate({
     title: work.title,
     description: work.description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(work.title)}`,
+    image: imageUrl,
     path: work.path,
-  });
+    twitter: {
+      card: "summary_large_image",
+      title: work.title,
+      description: work.description,
+      images: [imageUrl],
+    },
+    openGraph: {
+      title: work.title,
+      description: work.description,
+      url: `${baseURL}${work.path}`,
+      type: "website",
+      images: [
+        {
+          url: `${baseURL}${imageUrl}`,
+          width: 1200,
+          height: 630,
+          alt: `${work.title} preview`,
+        },
+      ],
+      siteName: work.title,
+    },
+  } as any);
 }
 
 export default function Work() {
   return (
-    <Column maxWidth="m" paddingTop="24">
+    <Column className={styles.fadeInUp} maxWidth="m" paddingTop="24">
       <Schema
         as="webPage"
         baseURL={baseURL}

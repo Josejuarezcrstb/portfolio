@@ -26,13 +26,21 @@ export async function GET(request: NextRequest) {
     
     // Get the image data
     const contentType = response.headers.get('content-type') || 'image/jpeg';
+
+    if (!contentType.startsWith('image/')) {
+      return NextResponse.json(
+        { error: 'URL did not return an image' },
+        { status: 400 }
+      );
+    }
+
     const imageData = await response.arrayBuffer();
     
     // Return the image with appropriate headers
     return new NextResponse(imageData, {
       headers: {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=86400',
+        'Cache-Control': 'public, max-age=86400, stale-while-revalidate=86400',
       },
     });
   } catch (error) {

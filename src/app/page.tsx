@@ -2,7 +2,6 @@ import {
   Heading,
   Text,
   Button,
-  Avatar,
   RevealFx,
   Column,
   Badge,
@@ -13,8 +12,12 @@ import {
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import styles from "@/components/animations.module.scss";
+import homeSkillsStyles from "@/components/home/HomeSkills.module.scss";
+import homeHeroStyles from "@/components/home/HomeHero.module.scss";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -28,7 +31,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <Column className={styles.fadeInUp} maxWidth="m" gap="xl" paddingY="12" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -42,12 +45,12 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
-        <Column maxWidth="s" horizontal="center" align="center">
+      <div className={homeHeroStyles.heroGrid}>
+        <div className={homeHeroStyles.heroText}>
           {home.featured.display && (
             <RevealFx
               fillWidth
-              horizontal="center"
+              horizontal="start"
               paddingTop="16"
               paddingBottom="32"
               paddingLeft="12"
@@ -65,41 +68,108 @@ export default function Home() {
               </Badge>
             </RevealFx>
           )}
-          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
+          <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="16">
+            <Heading className={homeHeroStyles.heroTitle} wrap="balance" variant="display-strong-l">
               {home.headline}
             </Heading>
           </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
+            <Text className={homeHeroStyles.heroSubline} wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
               {home.subline}
             </Text>
           </RevealFx>
-          <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
-            <Button
-              id="about"
-              data-border="rounded"
-              href={about.path}
-              variant="secondary"
-              size="m"
-              weight="default"
-              arrowIcon
-            >
-              <Row gap="8" vertical="center" paddingRight="4">
-                {about.avatar.display && (
-                  <Avatar
-                    marginRight="8"
-                    style={{ marginLeft: "-0.75rem" }}
-                    src={person.avatar}
-                    size="m"
-                  />
-                )}
-                {about.title}
-              </Row>
-            </Button>
+          <RevealFx paddingTop="12" delay={0.4} horizontal="start" paddingLeft="12">
+            <Row className={homeHeroStyles.heroButtons} wrap horizontal="start">
+              {home.primaryCTA && (
+                <Button
+                  id="primary-cta"
+                  data-border="rounded"
+                  href={home.primaryCTA.href}
+                  variant="primary"
+                  size="m"
+                  weight="strong"
+                  arrowIcon
+                >
+                  <Row gap="8" vertical="center" paddingRight="4">
+                    {home.primaryCTA.label}
+                  </Row>
+                </Button>
+              )}
+              {home.secondaryCTA && (
+                <Button
+                  id="secondary-cta"
+                  data-border="rounded"
+                  href={home.secondaryCTA.href}
+                  variant="secondary"
+                  size="m"
+                  weight="default"
+                >
+                  <Row gap="8" vertical="center" paddingRight="4">
+                    {home.secondaryCTA.label}
+                  </Row>
+                </Button>
+              )}
+            </Row>
           </RevealFx>
-        </Column>
+        </div>
+
+        <div className={homeHeroStyles.heroImage}>
+          <OptimizedImage
+            src="/images/profile.jpg"
+            alt="Jose Maria Juarez"
+            width={840}
+            height={840}
+            priority
+          />
+        </div>
+      </div>
+      <Column className={homeSkillsStyles.skillsSection} fillWidth>
+        <Heading as="h2" variant="display-strong-m" marginBottom="12">
+          Data Engineering Skills
+        </Heading>
+        <div className={homeSkillsStyles.skillsGrid}>
+          {about.technical.skills.map((skill) => (
+            <div key={skill.title} className={homeSkillsStyles.skillCard}>
+              <Text className={homeSkillsStyles.skillTitle} variant="heading-strong-l">
+                {skill.title}
+              </Text>
+              {skill.description && (
+                <Text className={homeSkillsStyles.skillDescription} variant="body-default-m">
+                  {skill.description}
+                </Text>
+              )}
+              {skill.tags && skill.tags.length > 0 && (
+                <div className={homeSkillsStyles.skillTags}>
+                  {skill.tags.map((tag, index) => (
+                    <span key={`${skill.title}-${index}`} className={homeSkillsStyles.skillTag}>
+                      {tag.name}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </Column>
+
+      <Column className={homeSkillsStyles.softSkillsSection} fillWidth>
+        <Heading as="h2" variant="display-strong-m" marginBottom="12">
+          {home.softSkills?.title ?? "Beyond the Data"}
+        </Heading>
+        <div className={homeSkillsStyles.softSkillsGrid}>
+          {home.softSkills?.cards?.map((card) => (
+            <div key={card.title} className={homeSkillsStyles.softSkillCard}>
+              <Text className={homeSkillsStyles.softSkillTitle} variant="heading-strong-l">
+                {card.title}
+              </Text>
+              <Text className={homeSkillsStyles.softSkillDescription} variant="body-default-m">
+                {card.description}
+              </Text>
+            </div>
+          ))}
+        </div>
+      </Column>
+
       <RevealFx translateY="16" delay={0.6}>
         <Projects range={[1, 1]} />
       </RevealFx>

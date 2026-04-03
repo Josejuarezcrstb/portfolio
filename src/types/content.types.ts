@@ -101,6 +101,24 @@ export interface Home extends BasePageConfig {
   };
   /** The sub text which appears below the headline */
   subline: React.ReactNode;
+  /** Primary call-to-action for the hero section */
+  primaryCTA?: {
+    label: string;
+    href: string;
+  };
+  /** Secondary call-to-action for the hero section */
+  secondaryCTA?: {
+    label: string;
+    href: string;
+  };
+  /** Soft skills and work approach section */
+  softSkills?: {
+    title: string;
+    cards: Array<{
+      title: string;
+      description: React.ReactNode;
+    }>;
+  };
 }
 
 /**
@@ -237,4 +255,29 @@ export interface Gallery extends BasePageConfig {
     /** Image orientation (horizontal/vertical) */
     orientation: string;
   }>;
+}
+
+export type MdxTeamMember = {
+  name: string;
+  role: string;
+  avatar: string;
+  linkedIn: string;
+};
+
+export interface MdxPostMetadata {
+  title: string;
+  subtitle?: string;
+  publishedAt: string;
+  summary: string;
+  image?: string;
+  images: string[];
+  tag?: string;
+  team?: MdxTeamMember[];
+  link?: string;
+}
+
+export interface MdxPost {
+  metadata: MdxPostMetadata;
+  slug: string;
+  content: string;
 }

@@ -7,6 +7,7 @@ import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 
 import { routes, display, person, about, blog, work, gallery } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
+import { OptimizedImage } from "./OptimizedImage";
 import styles from "./Header.module.scss";
 
 type TimeDisplayProps = {

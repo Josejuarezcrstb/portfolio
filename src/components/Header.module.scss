@@ -8,6 +8,43 @@
     mask-size: 100% 100%;
 }
 
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--static-space-2);
+}
+
+.profileAvatar {
+  border-radius: 50%;
+  border: 1px solid var(--neutral-alpha-weak);
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.profileName {
+  color: var(--neutral-on-background-weak);
+  font-size: 0.8rem;
+  font-weight: 300;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+@media (max-width: breakpoints.$s) {
+    .position {
+        top: auto;
+        bottom: var(--static-space-24);
+    }
+
+    .mask {
+        transform: rotate(180deg);
+        bottom: 0;
+    }
+
+    .profileName {
+      display: none;
+    }
+}
 @media (max-width: breakpoints.$s) {
     .position {
         top: auto;

@@ -56,6 +56,8 @@ function CustomLink({ href, children, ...props }: CustomLinkProps) {
   );
 }
 
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 function createImage({ alt, src, ...props }: MediaProps & { src: string }) {
   if (!src) {
     console.error("Media requires a valid 'src' property.");
@@ -63,16 +65,15 @@ function createImage({ alt, src, ...props }: MediaProps & { src: string }) {
   }
 
   return (
-    <Media
-      marginTop="8"
-      marginBottom="16"
-      enlarge
-      radius="m"
-      border="neutral-alpha-medium"
-      sizes="(max-width: 960px) 100vw, 960px"
-      alt={alt}
+    <OptimizedImage
+      alt={alt ?? "Image"}
       src={src}
-      {...props}
+      width={960}
+      height={540}
+      sizes="(max-width: 960px) 100vw, 960px"
+      loading="lazy"
+      priority={false}
+      {...(props as any)}
     />
   );
 }
@@ -121,34 +122,37 @@ function createInlineCode({ children }: { children: ReactNode }) {
   return <InlineCode>{children}</InlineCode>;
 }
 
-function createCodeBlock(props: any) {
+function createCodeBlock(props: React.ComponentPropsWithoutRef<"pre">) {
   // For pre tags that contain code blocks
-  if (props.children && props.children.props && props.children.props.className) {
-    const { className, children } = props.children.props;
+  const child = props.children as React.ReactElement | undefined;
 
-    // Extract language from className (format: language-xxx)
-    const language = className.replace("language-", "");
-    const label = language.charAt(0).toUpperCase() + language.slice(1);
+  if (child && child.props) {
+    const childProps = child.props as { className?: string; children?: React.ReactNode };
+    if (childProps.className) {
+      const { className, children } = childProps;
+      const language = className.replace("language-", "");
+      const label = language.charAt(0).toUpperCase() + language.slice(1);
 
-    return (
-      <CodeBlock
-        marginTop="8"
-        marginBottom="16"
-        codes={[
-          {
-            code: children,
-            language,
-            label,
-          },
-        ]}
-        copyButton={true}
-      />
-    );
+      return (
+        <CodeBlock
+          marginTop="8"
+          marginBottom="16"
+          codes={[
+            {
+              code: Array.isArray(children) ? children.join("") : (children as string),
+              language,
+              label,
+            },
+          ]}
+          copyButton={true}
+        />
+      );
+    }
   }
 
-  // Fallback for other pre tags or empty code blocks
   return <pre {...props} />;
 }
+
 
 function createList(as: "ul" | "ol") {
   return ({ children }: { children: ReactNode }) => <List as={as}>{children}</List>;
@@ -170,22 +174,22 @@ function createHR() {
   );
 }
 
-const components = {
-  p: createParagraph as any,
-  h1: createHeading("h1") as any,
-  h2: createHeading("h2") as any,
-  h3: createHeading("h3") as any,
-  h4: createHeading("h4") as any,
-  h5: createHeading("h5") as any,
-  h6: createHeading("h6") as any,
-  img: createImage as any,
-  a: CustomLink as any,
-  code: createInlineCode as any,
-  pre: createCodeBlock as any,
-  ol: createList("ol") as any,
-  ul: createList("ul") as any,
-  li: createListItem as any,
-  hr: createHR as any,
+const components: Record<string, React.ComponentType<any>> = {
+  p: createParagraph,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+  h4: createHeading("h4"),
+  h5: createHeading("h5"),
+  h6: createHeading("h6"),
+  img: createImage,
+  a: CustomLink,
+  code: createInlineCode,
+  pre: createCodeBlock,
+  ol: createList("ol"),
+  ul: createList("ul"),
+  li: createListItem,
+  hr: createHR,
   Heading,
   Text,
   CodeBlock,

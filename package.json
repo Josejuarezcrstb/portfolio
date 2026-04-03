@@ -5,9 +5,12 @@
     "dev": "next dev",
     "export": "next export",
     "build": "next build",
+    "analyze": "cross-env ANALYZE=true next build",
     "biome-write": "npx @biomejs/biome format --write .",
+    "format": "npx @biomejs/biome format --write .",
+    "ci": "npm run build && npm run lint",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -27,10 +30,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@next/bundle-analyzer": "^15.0.0",
     "@types/cookie": "^0.6.0",
     "@types/node": "^20.17.30",
     "@types/react": "^19.2.4",
     "@types/react-dom": "^19.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "^9.25.0",
     "typescript": "^5.8.3",
     "tzdata": "^1.0.44"

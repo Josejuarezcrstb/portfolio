@@ -6,14 +6,17 @@ export const runtime = "nodejs";
 export async function GET(request: Request) {
   let url = new URL(request.url);
   let title = url.searchParams.get("title") || "Portfolio";
+  const sanitizedTitle = title.length > 100 ? `${title.slice(0, 100)}...` : title;
+  const avatarUrl = `${baseURL}${person.avatar}`;
 
   async function loadGoogleFont(font: string) {
     const url = `https://fonts.googleapis.com/css2?family=${font}`;
     const css = await (await fetch(url)).text();
     const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/);
 
-    if (resource) {
-      const response = await fetch(resource[1]);
+    if (resource && resource[1]) {
+      const fontUrl = resource[1];
+      const response = await fetch(fontUrl);
       if (response.status == 200) {
         return await response.arrayBuffer();
       }
@@ -53,7 +56,7 @@ export async function GET(request: Request) {
             overflow: "hidden",
           }}
         >
-          {title}
+          {sanitizedTitle}
         </span>
         <div
           style={{
@@ -63,7 +66,7 @@ export async function GET(request: Request) {
           }}
         >
           <img
-            src={baseURL + person.avatar}
+            src={avatarUrl}
             style={{
               width: "12rem",
               height: "12rem",
@@ -104,8 +107,11 @@ export async function GET(request: Request) {
       </div>
     </div>,
     {
-      width: 1280,
-      height: 720,
+      width: 1200,
+      height: 630,
+      headers: {
+        "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+      },
       fonts: [
         {
           name: "Geist",

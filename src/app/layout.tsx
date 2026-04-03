@@ -23,7 +23,28 @@ export async function generateMetadata() {
     baseURL: baseURL,
     path: home.path,
     image: home.image,
-  });
+    twitter: {
+      card: "summary_large_image",
+      title: home.title,
+      description: home.description,
+      images: [home.image],
+    },
+    openGraph: {
+      title: home.title,
+      description: home.description,
+      url: `${baseURL}${home.path}`,
+      type: "website",
+      images: [
+        {
+          url: `${baseURL}${home.image}`,
+          width: 1200,
+          height: 630,
+          alt: `${home.title} preview`,
+        },
+      ],
+      siteName: home.title,
+    },
+  } as any);
 }
 
 export default async function RootLayout({
