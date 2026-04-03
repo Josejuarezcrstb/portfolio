@@ -12,58 +12,58 @@ images:
 
 ## Supply Chain Analytics Architecture
 
-Este caso de estudio describe el desarrollo de un dashboard interactivo para líderes de Supply Chain en una empresa líder mexicana. El objetivo del proyecto es proporcionar visibilidad en tiempo real para balancear la carga de trabajo entre compradores y monitorear KPIs clave de desempeño.
+This case study outlines the development of an interactive dashboard for Supply Chain leaders at a leading Mexican company. The project's goal is to provide real-time visibility to balance the workload among buyers and monitor key performance indicators (KPIs).
 
-El sistema se construyó con Blazor WebAssembly (frontend), Appwrite (autenticación y backend) y Azure SQL Database (capa de datos). La solución apunta a un entorno corporativo de gran escala, con datos pre-normalizados en un sistema ERP global.
+The system was built with Blazor WebAssembly (frontend), Appwrite (authentication and backend), and Azure SQL Database (data layer). The solution targets a large-scale corporate environment, utilizing pre-normalized data from a global ERP system.
 
 ---
 
 ## The Challenge
 
-- Falta de visibilidad operativa en tiempo real para coordinadores de compras.
-- Requerimiento de una interfaz segura y rápida con latencia menor a 2 segundos.
-- Integración en una arquitectura distribuida cruzando límites de proveedor (Blazor + Appwrite + Azure SQL) y control de roles (coordinador/comprador/administrador).
-- Necesidad de generar alertas de saturación y datos procesables sin modificar la base transaccional.
+- Lack of real-time operational visibility for purchasing coordinators.
+- Requirement for a secure and fast interface with sub-2-second latency.
+- Integration within a distributed architecture crossing vendor boundaries (Blazor + Appwrite + Azure SQL) and strict role-based access control (coordinator/buyer/admin).
+- Need to generate workload saturation alerts and actionable data without modifying the transactional database.
 
 ## The Architecture
 
-- Frontend: Blazor WebAssembly (SPA) con controles de gráficas, filtros y tarjetas KPI.
-- Autenticación: Appwrite Cloud con JWT y roles.
-- API: Minimal API ASP.NET Core para validación de token y consultas SQL con parámetros.
-- Base de datos: Azure SQL con tablas relacionales normalizadas (SAP S/4HANA-style).
-- Endpoints estratégicos: `/api/workload/kpis`, `/api/workload/buyer-load`, filtros de rango de fechas.
+- Frontend: Blazor WebAssembly (SPA) featuring chart controls, dynamic filters, and KPI cards.
+- Authentication: Appwrite Cloud with JWT and role management.
+- API: ASP.NET Core Minimal API for token validation and parameterized SQL queries.
+- Database: Azure SQL with normalized relational tables (SAP S/4HANA-style).
+- Strategic Endpoints: `/api/workload/kpis`, `/api/workload/buyer-load`, and date range filters.
 
 ## Advanced Troubleshooting
 
-Durante la integración técnica, resolví múltiples problemas de infraestructura y red:
+During the technical integration, I resolved multiple infrastructure and network challenges:
 
-1. CORS y límites de origen
-   - Ajusté reglas CORS en Appwrite y configuración de cabeceras en Blazor.
-   - Validé que las peticiones preflight (`OPTIONS`) se resolvieran con 204 y que las cabeceras `Authorization` y `Content-Type` estuvieran permitidas.
+1. CORS and Origin Limits
+   - Adjusted CORS rules within Appwrite and configured appropriate headers in Blazor.
+   - Validated that preflight requests (OPTIONS) resolved with a 204 status and that Authorization and Content-Type headers were permitted.
 
-2. Autenticación y token flow
-   - Implementé un middleware en la Minimal API para verificar la validez JWT de Appwrite y recuperar el rol del usuario.
-   - Diagnostiqué 401/403 en llamadas con tokens expirados o en roles sin permisos.
+2. Authentication and Token Flow
+   - Implemented middleware in the Minimal API to verify Appwrite JWT validity and extract user roles.
+   - Diagnosed 401/403 errors related to expired tokens or insufficient role permissions.
 
-3. Azure SQL y throttling
-   - Afiné la conexión a Azure SQL con retry policies y timeout escalable.
-   - Monitoricé consultas de agregación (`SUM`, `COUNT`, `GROUP BY`) para evitar bloqueos de row-locks.
+3. Azure SQL and Throttling
+   - Tuned the Azure SQL connection with retry policies and scalable timeouts.
+   - Monitored aggregation queries (SUM, COUNT, GROUP BY) to prevent row-lock blocking.
 
-4. GitHub Copilot CLI para depuración avanzada
-   - Usé Copilot CLI para inyectar diagnósticos en tiempo real: streaming de stack traces, comandos para inspeccionar contenedores y headers de Appwrite.
-   - De “guess and refresh” a un proceso metódico con pasos comprobables, con resultados reproducibles para conflictos `409` y ajustes en `blazor.webassembly.js`.
+4. GitHub Copilot CLI for Advanced Debugging
+   - Utilized Copilot CLI to inject real-time diagnostics, including stack trace streaming, container inspection commands, and Appwrite header analysis.
+   - Transitioned from a "guess and refresh" approach to a methodical, testable process, yielding reproducible results for 409 conflicts and adjustments in blazor.webassembly.js.
 
 ## Impact & Next Steps
 
-**Resultados tempranos:**
-- Dashboard funcional con KPIs de carga de trabajo por comprador.
-- Mecanismo de semáforo (rojo/amarillo/verde) para reasignación proactiva.
-- Exportación de datasets a CSV/Excel para reporting.
+**Early Results:**
+- Fully functional dashboard displaying workload KPIs per buyer.
+- Traffic-light mechanism (red/yellow/green) for proactive task reassignment.
+- Dataset export capabilities to CSV/Excel for reporting.
 
-**Próximos pasos:**
-- Avanzar en caching y prefetching de consultas para mantener latencias < 2s.
-- Refinar UX de visualización con animaciones suaves y páginas KPI por role.
-- Incorporar recomendaciones automáticas mediante reglas de negocio (y/o ML ligero) basadas en carga histórica.
+**Next Steps:**
+- Advance caching and query prefetching strategies to consistently maintain < 2s latency.
+- Refine visualization UX with smooth animations and role-specific KPI pages.
+- Incorporate automated recommendations through business rules (and/or lightweight ML models) based on historical workload data.
 
-Este proyecto valida la capacidad de diseñar y operar soluciones seguras, escalables y orientadas al negocio en sistemas distribuidos, mientras se mantiene un enfoque sólido en calidad de datos y tiempo de respuesta.
+This project validates the ability to design and operate secure, scalable, and business-oriented solutions in distributed systems, maintaining a strong focus on data quality and response times.
 

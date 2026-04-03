@@ -202,7 +202,7 @@ const about: About = {
     title: "Technical skills",
     skills: [
       {
-        title: "Lenguajes",
+        title: "Languages",
         description: <>Python (Pandas, scripting), SQL.</>,
         tags: [
           { name: "Python (Pandas)" },
@@ -210,16 +210,16 @@ const about: About = {
         ],
       },
       {
-        title: "Cloud & Bases de Datos",
-        description: <>Azure SQL Database, modelado relacional y buenas prácticas en diseño de datos.</>,
+        title: "Cloud & Databases",
+        description: <>Azure SQL Database, relational data modeling, and database design best practices.</>,
         tags: [
           { name: "Azure SQL Database" },
           { name: "Relational Data Modeling" },
         ],
       },
       {
-        title: "Procesos",
-        description: <>ETL / ELT, Data Quality, Data Cleansing.</>,
+        title: "Processes",
+        description: <>ETL / ELT concepts, Data Quality, Data Cleansing.</>,
         tags: [
           { name: "ETL / ELT Concepts" },
           { name: "Data Quality" },
@@ -227,8 +227,8 @@ const about: About = {
         ],
       },
       {
-        title: "Herramientas & Entorno",
-        description: <>Git, Docker, Excel Advanced, Power BI.</>,
+        title: "Tools & Environment",
+        description: <>Git, Docker, Advanced Excel, Power BI.</>,
         tags: [
           { name: "Git" },
           { name: "Docker" },
