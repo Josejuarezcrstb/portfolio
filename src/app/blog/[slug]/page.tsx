@@ -14,9 +14,13 @@ import {
   Avatar,
   Line,
 } from "@once-ui-system/core";
+
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+
 import { baseURL, about, blog, person } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
-import { getPosts } from "@/utils/utils";
+import { getPostBySlug, getPosts } from "@/utils/utils";
 import { Metadata } from "next";
 import React from "react";
 import { Posts } from "@/components/blog/Posts";
@@ -32,12 +36,12 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string | string[] };
+  params: Promise<{ slug: string | string[] }>;
 }): Promise<Metadata> {
-  const slugPath = Array.isArray(params.slug) ? params.slug.join("/") : params.slug || "";
+  const resolvedParams = await params;
+  const slugPath = Array.isArray(resolvedParams.slug) ? resolvedParams.slug.join("/") : resolvedParams.slug || "";
 
-  const posts = getPosts(["src", "app", "blog", "posts"]);
-  let post = posts.find((post) => post.slug === slugPath);
+  const post = getPostBySlug(slugPath, ["src", "app", "blog", "posts"]);
 
   if (!post) return {};
 
@@ -73,10 +77,11 @@ export async function generateMetadata({
   } as any);
 }
 
-export default async function Blog({ params }: { params: { slug: string | string[] } }) {
-  const slugPath = Array.isArray(params.slug) ? params.slug.join("/") : params.slug || "";
+export default async function Blog({ params }: { params: Promise<{ slug: string | string[] }> }) {
+  const resolvedParams = await params;
+  const slugPath = Array.isArray(resolvedParams.slug) ? resolvedParams.slug.join("/") : resolvedParams.slug || "";
 
-  let post = getPosts(["src", "app", "blog", "posts"]).find((post) => post.slug === slugPath);
+  const post = getPostBySlug(slugPath, ["src", "app", "blog", "posts"]);
 
   if (!post) {
     notFound();

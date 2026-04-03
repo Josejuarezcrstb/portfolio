@@ -50,6 +50,18 @@ function getMDXData(dir: string): MdxPost[] {
   });
 }
 
+export function getPostBySlug(slug: string, customPath = ["", "", "", ""]): MdxPost | null {
+  const postsDir = path.join(process.cwd(), ...customPath);
+  const filePath = path.join(postsDir, `${slug}.mdx`);
+
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  const { metadata, content } = readMDXFile(filePath);
+  return { metadata, slug, content };
+}
+
 export function getPosts(customPath = ["", "", "", ""]): MdxPost[] {
   const postsDir = path.join(process.cwd(), ...customPath);
   return getCachedPosts(postsDir, () => getMDXData(postsDir));

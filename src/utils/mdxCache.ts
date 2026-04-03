@@ -44,6 +44,12 @@ function getCacheKey(filePath: string): string {
 }
 
 export function getCachedPosts(directory: string, loader: () => MdxPost[]): MdxPost[] {
+  if (process.env.NODE_ENV !== "production") {
+    const posts = loader();
+    inMemoryCache.set(directory, posts);
+    return posts;
+  }
+
   if (inMemoryCache.has(directory)) {
     return inMemoryCache.get(directory)!;
   }
