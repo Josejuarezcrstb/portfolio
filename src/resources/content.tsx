@@ -56,13 +56,10 @@ const home: Home = {
     </>
   ),
   primaryCTA: {
-    label: "View Projects",
-    href: "/work",
+    label: "Download CV",
+    href: "/cv.pdf",
   },
-  secondaryCTA: {
-    label: "Dev Blog",
-    href: "/blog",
-  },
+  secondaryCTA: undefined,
   softSkills: {
     title: "My Approach to Work",
     cards: [

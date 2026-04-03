@@ -88,7 +88,9 @@ export default function Home() {
                   variant="primary"
                   size="m"
                   weight="strong"
-                  arrowIcon
+                  prefixIcon="document"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Row gap="8" vertical="center" paddingRight="4">
                     {home.primaryCTA.label}
