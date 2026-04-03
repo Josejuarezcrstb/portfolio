@@ -4,7 +4,7 @@ const person: Person = {
   firstName: "Jose Maria",
   lastName: "Juarez",
   name: "Jose Maria Juarez",
-  role: "IT student pivoting to ML/MLOps with Azure",
+  role: "IT student pivoting to Data Engineering & Scalable Analytics with Azure",
   avatar: "/images/avatar-profile.jpg",
   email: "j0s3.juarez@gmail.com",
   location: "America/Monterrey",
@@ -42,8 +42,8 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name} | ML & MLOps Portfolio`,
-  description: `Portfolio highlighting the transition from WFM and fraud prevention into Machine Learning and Azure MLOps by ${person.name}`,
+  title: `${person.name} | Data Engineering & Analytics Portfolio`,
+  description: `Portfolio highlighting the transition from WFM and fraud prevention into Data Engineering and Azure-based scalable analytics by ${person.name}`,
   headline: <>Bridging Operational Analytics and Data Engineering</>,
   featured: {
     display: false,
@@ -52,7 +52,7 @@ const home: Home = {
   },
   subline: (
     <>
-      Leveraging over 4 years of experience in data validation, KPI tracking, and workforce analytics. Currently focused on designing scalable data solutions, building Python-driven ETL processes, and managing relational databases with Azure SQL to ensure high data quality and empower business decisions.
+      I am Jose Juarez. I bridge the gap between operational analytics and data engineering by leveraging over 4 years of experience in data validation, KPI tracking, and workforce analytics. Currently focused on designing scalable data solutions, building Python-driven ETL processes, and managing relational databases with Azure SQL to ensure high data quality and empower business decisions.
     </>
   ),
   primaryCTA: {
@@ -115,7 +115,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        As an IT Engineering student and Data Professional, I bring over 4 years of hands-on experience in data stewardship, validation, and analytics. My background in workforce management taught me the critical importance of data accuracy. Today, I apply that structured analytical thinking to Data Engineering—using Python (Pandas), SQL, and Azure to build reliable data ingestion workflows, cleanse complex datasets, and structure relational databases for advanced analytics. Fluent in English and Spanish, I thrive in environments that require complex problem-solving and cross-functional communication.
+        As an IT Undergraduate student and Data Professional, I bring over 4 years of hands-on experience in data stewardship, validation, and analytics. My background in workforce management taught me the critical importance of data accuracy. Today, I apply that structured analytical thinking to Data Engineering—using Python (Pandas), SQL, and Azure to build reliable data ingestion workflows, cleanse complex datasets, and structure relational databases for advanced analytics. Fluent in English and Spanish, I thrive in environments that require complex problem-solving and cross-functional communication.
       </>
     ),
   },
@@ -124,61 +124,37 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "Foundever",
-        timeframe: "Jan 2023 – Sep 2025",
-        role: "Fraud & Risk Analyst – Account Takeover Prevention (CRS III)",
-        achievements: [
-          <>
-            Handled complex fraud cases for a major U.S. financial institution, specializing in Account Takeover prevention, identity verification, and high-impact decisioning to protect clients from financial loss.
-          </>,
-          <>
-            Key responsibilities:
-            <ul>
-              <li>Investigated high-risk ATO cases using behavioral patterns and login anomalies.</li>
-              <li>Performed detailed risk assessments to gauge fraud exposure.</li>
-              <li>Executed identity verification and restored secure access for compromised accounts.</li>
-              <li>Documented findings for compliance with banking regulations.</li>
-              <li>Guided junior analysts on complex cases and best practices.</li>
-              <li>Balanced customer experience with strict risk-mitigation protocols.</li>
-            </ul>
-          </>,
-          <>
-            Core strengths: attention to fraud signals, fast decision-making under pressure, senior case handling, and secure, customer-centric resolutions.
-          </>,
-        ],
-      },
-      {
-        company: "Centris Information Services",
+        company: "Centris",
         timeframe: "Feb 2019 – Nov 2022",
-        role: "Reporting Analyst",
-        achievements: [
-          <>
-            Progressed from operations to analytics, managing forecasting, reporting, and capacity optimization across multiple business lines.
-          </>,
-          <>
-            Key contributions:
-            <ul>
-              <li>Forecasted multi-skill call volume and workload demand to optimize staffing and SLAs.</li>
-              <li>Built 13+ week capacity forecasts, schedules, and staffing models.</li>
-              <li>Monitored hours, shifts, billable time, and platform usage to surface risks.</li>
-              <li>Improved forecast accuracy using historical patterns and operational drivers.</li>
-              <li>Separated staffing gaps from process issues to target fixes.</li>
-              <li>Delivered data-driven insights for planning and allocation.</li>
-            </ul>
-          </>,
-          <>
-            Core strengths: workforce analytics, forecasting, KPI tracking, data storytelling, and stakeholder communication.
-          </>,
-        ],
-      },
-      {
-        company: "MDY BPO & Contact Center",
-        timeframe: "Dec 2017 – Feb 2019",
         role: "Workforce Management Analyst",
         achievements: [
-          <>Analyzed and forecasted call volume to keep productivity and staffing balanced.</>,
-          <>Built dashboards and reports to communicate actionable recommendations.</>,
-          <>Earlier experience as Customer Service Representative focused on tech support.</>,
+          <>
+            Data Stewardship & Quality: Executed data stewardship across operational datasets, ensuring cleansing and accuracy to provide highly reliable data for senior management.
+          </>,
+          <>
+            Data Gathering & Transformation: Assembled, reviewed, and validated large datasets to identify traffic patterns and trends, directly supporting resource forecasting.
+          </>,
+          <>
+            Analytics & Reporting: Analyzed complex operational data to optimize processes, ensuring data accuracy met functional business requirements.
+          </>,
+        ],
+      },
+      {
+        company: "MDY Contact Center",
+        timeframe: "Jul 2016 – Feb 2019",
+        role: "Operations Supervisor & Workforce Management Analyst",
+        achievements: [
+          <>
+            DataViz & Modeling: Designed and maintained data dashboards to communicate key operational metrics, enabling strategic data-driven decisions across the floor.
+          </>,
+          <>
+            Data Requirements & Analysis: Collected and analyzed relevant operational data, distinguishing between workflow inefficiencies, technical challenges, and external factors.
+          </>,
+          <>
+            Quality Assurance: Maintained strict data quality and metadata standards to ensure thorough understanding and output enhancement.
+          </>,
+          <>Earlier experience as Operations Supervisor, and customer support agent.</>,
+          <>As the Operations Supervisor, I coached and developed my team to prepare them for career advancement.</>,
         ],
       },
     ],
