@@ -139,19 +139,17 @@ const about: About = {
       {
         company: "MDY Contact Center",
         timeframe: "Jul 2016 – Feb 2019",
-        role: "Operations Supervisor & Workforce Management Analyst",
+        role: "Information & Forecasting Analyst",
         achievements: [
+          <>
+            Data Cleaning & Automation: Executed data cleaning tasks to ensure data quality and leveraged the Office 365 suite, specifically Power Automate, to streamline forecasting workflows and operational reporting.
+          </>,
           <>
             DataViz & Modeling: Designed and maintained data dashboards to communicate key operational metrics, enabling strategic data-driven decisions across the floor.
           </>,
           <>
             Data Requirements & Analysis: Collected and analyzed relevant operational data, distinguishing between workflow inefficiencies, technical challenges, and external factors.
           </>,
-          <>
-            Quality Assurance: Maintained strict data quality and metadata standards to ensure thorough understanding and output enhancement.
-          </>,
-          <>Earlier experience as Operations Supervisor, and customer support agent.</>,
-          <>As the Operations Supervisor, I coached and developed my team to prepare them for career advancement.</>,
         ],
       },
     ],
