@@ -52,7 +52,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I am Jose Juarez. I bridge the gap between operational analytics and data engineering by leveraging over 4 years of experience in data validation, KPI tracking, and workforce analytics. Currently focused on designing scalable data solutions, building Python-driven ETL processes, and managing relational databases with Azure SQL to ensure high data quality and empower business decisions.
+      I'm Jose Juarez a data professional with over 4 years of experience in data analytics, data quality, and operations management. Transitioning into Data Engineering with hands-on expertise in Python-driven ETL processes, SQL, and Cloud environments (Azure SQL). Proven ability to bridge the gap between operational workflows and scalable architectures by assembling, cleansing, and validating complex datasets. Bilingual (Native Spanish, Professional English) and highly capable of structuring relational databases to ensure high data quality and empower strategic business decisions.
     </>
   ),
   primaryCTA: {
@@ -112,7 +112,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        As an IT Undergraduate student and Data Professional, I bring over 4 years of hands-on experience in data stewardship, validation, and analytics. My background in workforce management taught me the critical importance of data accuracy. Today, I apply that structured analytical thinking to Data Engineering—using Python (Pandas), SQL, and Azure to build reliable data ingestion workflows, cleanse complex datasets, and structure relational databases for advanced analytics. Fluent in English and Spanish, I thrive in environments that require complex problem-solving and cross-functional communication.
+        As a Data Professional pivoting to Data Engineering & Scalable Analytics with Azure, I bring over 4 years of hands-on experience in data stewardship, validation, and analytics. My background in workforce management taught me the critical importance of data accuracy. Today, I apply that structured analytical thinking to Data Engineering—using Python, SQL, and Azure to build reliable data ingestion workflows, cleanse complex datasets, and structure relational databases for advanced analytics. Fluent in English and Spanish, I thrive in environments that require complex problem-solving, high-quality data governance, and cross-functional communication.
       </>
     ),
   },
@@ -120,6 +120,22 @@ const about: About = {
     display: true,
     title: "Work Experience",
     experiences: [
+      {
+        company: "Epicor Software Corporation",
+        timeframe: "Apr 2026 – Present",
+        role: "Data Content Coordinator",
+        achievements: [
+          <>
+            Data Transformation & Normalization: Execute parsing, cleansing, and structuring of complex datasets across various software programs to prepare them for consumption and analytics.
+          </>,
+          <>
+            Quality Assurance & Stewardship: Conduct rigorous data verification and quality analyses, ensuring adherence to strict business rules and product guidelines.
+          </>,
+          <>
+            Requirements Analysis: Interpret source documents and electronic media in multiple formats, translating business needs into reliable, structured data products.
+          </>,
+        ],
+      },
       {
         company: "Centris",
         timeframe: "Feb 2019 – Nov 2022",
@@ -138,7 +154,7 @@ const about: About = {
       },
       {
         company: "MDY Contact Center",
-        timeframe: "Jul 2016 – Feb 2019",
+        timeframe: "Jan 2017 – Feb 2019",
         role: "Information & Forecasting Analyst",
         achievements: [
           <>
